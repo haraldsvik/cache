@@ -2,7 +2,7 @@
 
 A high-performance caching service implemented in Rust that provides both HTTP and gRPC interfaces. This service is designed to handle key-value lookups efficiently using an in-memory cache.
 
-Designed as a "Read-Only" cache that lives in front of pseudonym-service.
+Designed as a "Read-Only" cache that.
 
 ## Features
 

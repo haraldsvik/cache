@@ -11,13 +11,17 @@ use cache::{
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // Create a client connecting to our gRPC server
-    let mut client = CacheServiceClient::connect("http://[::1]:50051").await?;
+    // Create a client connecting to our gRPC server using the new builder pattern
+    let channel = Channel::from_static("http://[::1]:50051")
+        .connect()
+        .await?;
+    
+    let mut client = CacheServiceClient::new(channel);
 
     // Create a test request with some keys
     let request = tonic::Request::new(LookupRequest {
         keys: vec![
-            "80268025748".to_string(),    // Should be found if it exists in mock_data.txt
+            "3615581".to_string(),    // Should be found if it exists in mock_data.txt
             "999999".to_string(),   // Should be missing
             "abc123".to_string(),   // Should be skipped (non-numeric)
         ],
