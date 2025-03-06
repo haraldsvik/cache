@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package cache;
+
+service CacheService {
+  rpc Lookup (LookupRequest) returns (LookupResponse) {}
+}
+
+message LookupRequest {
+  repeated string keys = 1;
+}
+
+message LookupResponse {
+  map<string, string> found = 1;
+  repeated string missing = 2;
+} 
